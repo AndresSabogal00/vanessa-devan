@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanessa &amp; Devan — Santa Rosa de Cabal · 2026</title>
+
+  <!-- Google Fonts: se cargan las 3 combinaciones para el selector de tipografía de muestra -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Karla:wght@300;400;500;600&family=Montserrat:wght@300;400;500&family=Sacramento&family=Work+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       CONTROLES FIJOS
+       ============================================================ -->
+
+  <!-- Selector de idioma ES / EN (esquina superior derecha) -->
+  <nav class="lang-switch" aria-label="Idioma / Language">
+    <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  </nav>
+
+  <!-- TEMPORAL: selector de tipografía para revisión, quitar cuando decidan -->
+  <!-- (esquina inferior derecha, no interfiere con el botón de idioma) -->
+  <nav class="font-switch" aria-label="Tipografía / Typeface">
+    <button type="button" data-font="A" aria-pressed="false">A</button>
+    <button type="button" data-font="B" aria-pressed="false">B</button>
+    <button type="button" data-font="C" aria-pressed="false">C</button>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         1. HERO
+         ============================================================ -->
+    <section id="hero" class="hero">
+      <!-- Ornamentos florales de esquina (decorativos) -->
+      <img class="hero__corner hero__corner--left" src="flores esquina izquierda superior.png" alt="" aria-hidden="true" />
+      <img class="hero__corner hero__corner--right" src="flores esquina derecha superior.png" alt="" aria-hidden="true" />
+
+      <div class="hero__content reveal">
+        <h1 class="hero__names" data-i18n="hero_names">Vanessa &amp; Devan</h1>
+        <p class="hero__date" data-i18n="hero_date">12 – 14 de junio de 2026</p>
+        <p class="hero__location" data-i18n="hero_location">Santa Rosa de Cabal, Colombia</p>
+        <img class="hero__illustration" src="hacienda.png" data-i18n-alt="alt_hacienda" alt="Ilustración en acuarela de la hacienda entre las montañas" />
+      </div>
+
+      <!-- Indicador sutil de scroll -->
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="hero__scroll-arrow">&#8595;</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. BIENVENIDA / INFO GENERAL
+         ============================================================ -->
+    <section id="bienvenida" class="welcome">
+      <div class="container reveal">
+        <h2 class="section-title" data-i18n="welcome_title">¡Nos casamos!</h2>
+
+        <div class="welcome__intro">
+          <p class="welcome__text" data-i18n="welcome_text">Nos hace muchísima ilusión celebrar nuestro matrimonio rodeados de las personas que más queremos, en el corazón del Eje Cafetero. Prepárense para un fin de semana de café, montañas y mucha fiesta: aquí encontrarán todo lo que necesitan para acompañarnos.</p>
+          <img class="welcome__accent" src="colibri y orquidea.png" data-i18n-alt="alt_colibri" alt="Ilustración en acuarela de un colibrí y una orquídea" />
+        </div>
+
+        <!-- Info práctica: 3 tarjetas (hotel / transporte / turismo) -->
+        <div class="info-cards">
+          <article class="info-card">
+            <h3 data-i18n="info1_title">Dónde hospedarse</h3>
+            <p data-i18n="info1_text">Recomendamos el Hotel Boutique Los Guaduales, a 10 minutos de la hacienda y con vista a los cafetales. Al reservar, mencionen la boda de Vanessa y Devan para acceder a la tarifa especial de grupo.</p>
+          </article>
+          <article class="info-card">
+            <h3 data-i18n="info2_title">Cómo llegar</h3>
+            <p data-i18n="info2_text">El aeropuerto más cercano es el Internacional Matecaña de Pereira (PEI), a unos 45 minutos en carro. Habrá transporte compartido desde Pereira y desde el parque principal de Santa Rosa antes de cada evento.</p>
+            <!-- Enlace externo de transporte (único link externo del sitio) -->
+            <a class="btn btn--outline" href="#" data-i18n="info2_button">Reservar transporte</a>
+          </article>
+          <article class="info-card">
+            <h3 data-i18n="info3_title">Antes o después</h3>
+            <p data-i18n="info3_text">Si quieren quedarse unos días más, la agencia Rutas del Cafetal organiza salidas a los termales, fincas cafeteras y el Valle de Cocora. Escríbanles de nuestra parte y armamos plan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. MAPA
+         ============================================================ -->
+    <section id="mapa" class="map">
+      <div class="container reveal">
+        <h2 class="section-title" data-i18n="map_title">El lugar</h2>
+        <img class="map__image" src="mapa.png" data-i18n-alt="alt_mapa" alt="Mapa ilustrado en acuarela del valle de Santa Rosa de Cabal" />
+        <p class="map__caption" data-i18n="map_caption">Valle de Santa Rosa de Cabal, Risaralda — Eje Cafetero colombiano</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. ITINERARIO (3 días, siempre visibles, sin tabs)
+         ============================================================ -->
+    <section id="itinerario" class="itinerary">
+      <div class="container reveal">
+        <h2 class="section-title" data-i18n="itin_title">Itinerario</h2>
+
+        <div class="itinerary__days">
+
+          <!-- Día 1 -->
+          <article class="day">
+            <h3 class="day__title" data-i18n="day1_title">Día 1</h3>
+            <p class="day__date" data-i18n="day1_date">Viernes, 12 de junio</p>
+            <ul class="day__events">
+              <li>
+                <img src="taza de cafe.png" data-i18n-alt="alt_cafe" alt="Ícono de taza de café" />
+                <span class="event__time" data-i18n="day1_e1_time">4:00 p. m.</span>
+                <span class="event__name" data-i18n="day1_e1_name">Llegada y check-in</span>
+              </li>
+              <li>
+                <img src="copas de vino.png" data-i18n-alt="alt_copas" alt="Ícono de copas de vino" />
+                <span class="event__time" data-i18n="day1_e2_time">7:00 p. m.</span>
+                <span class="event__name" data-i18n="day1_e2_name">Cóctel de bienvenida</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Día 2 -->
+          <article class="day">
+            <h3 class="day__title" data-i18n="day2_title">Día 2</h3>
+            <p class="day__date" data-i18n="day2_date">Sábado, 13 de junio</p>
+            <ul class="day__events">
+              <li>
+                <img src="taza de cafe.png" data-i18n-alt="alt_cafe" alt="Ícono de taza de café" />
+                <span class="event__time" data-i18n="day2_e1_time">9:00 a. m.</span>
+                <span class="event__name" data-i18n="day2_e1_name">Desayuno cafetero</span>
+              </li>
+              <li>
+                <img src="orquidea sola.png" data-i18n-alt="alt_orquidea" alt="Ícono de flor de orquídea" />
+                <span class="event__time" data-i18n="day2_e2_time">4:00 p. m.</span>
+                <span class="event__name" data-i18n="day2_e2_name">Ceremonia</span>
+              </li>
+              <li>
+                <img src="copas de vino.png" data-i18n-alt="alt_copas" alt="Ícono de copas de vino" />
+                <span class="event__time" data-i18n="day2_e3_time">6:30 p. m.</span>
+                <span class="event__name" data-i18n="day2_e3_name">Recepción y fiesta</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Día 3 -->
+          <article class="day">
+            <h3 class="day__title" data-i18n="day3_title">Día 3</h3>
+            <p class="day__date" data-i18n="day3_date">Domingo, 14 de junio</p>
+            <ul class="day__events">
+              <li>
+                <img src="taza de cafe.png" data-i18n-alt="alt_cafe" alt="Ícono de taza de café" />
+                <span class="event__time" data-i18n="day3_e1_time">10:00 a. m.</span>
+                <span class="event__name" data-i18n="day3_e1_name">Brunch de despedida</span>
+              </li>
+              <li>
+                <img src="orquidea sola.png" data-i18n-alt="alt_orquidea" alt="Ícono de flor de orquídea" />
+                <span class="event__time" data-i18n="day3_e2_time">1:00 p. m.</span>
+                <span class="event__name" data-i18n="day3_e2_name">Hasta pronto</span>
+              </li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. DETALLE DE EVENTOS
+         ============================================================ -->
+    <section id="eventos" class="events">
+      <div class="container reveal">
+        <h2 class="section-title" data-i18n="events_title">Los eventos</h2>
+
+        <!-- Evento 1: cóctel de bienvenida -->
+        <article class="event-detail">
+          <img class="event-detail__icon" src="copas de vino.png" data-i18n-alt="alt_copas" alt="Ícono de copas de vino" />
+          <h3 class="event-detail__name" data-i18n="ev1_name">Cóctel de bienvenida</h3>
+          <p class="event-detail__meta" data-i18n="ev1_datetime">Viernes 12 de junio · 7:00 p. m.</p>
+          <p class="event-detail__meta" data-i18n="ev1_place">Jardín central, Hacienda La Camelia</p>
+          <p class="event-detail__desc" data-i18n="ev1_desc">Abrimos el fin de semana con un brindis al atardecer entre guaduas y farolitos. Habrá picadas de la región, música en vivo y todo el tiempo del mundo para ponernos al día.</p>
+          <p class="event-detail__dress" data-i18n="ev1_dress">Dress code: casual elegante</p>
+        </article>
+
+        <img class="divider" src="separador.png" alt="" aria-hidden="true" />
+
+        <!-- Evento 2: ceremonia -->
+        <article class="event-detail">
+          <img class="event-detail__icon" src="orquidea sola.png" data-i18n-alt="alt_orquidea" alt="Ícono de flor de orquídea" />
+          <h3 class="event-detail__name" data-i18n="ev2_name">Ceremonia</h3>
+          <p class="event-detail__meta" data-i18n="ev2_datetime">Sábado 13 de junio · 4:00 p. m.</p>
+          <p class="event-detail__meta" data-i18n="ev2_place">Capilla al aire libre, Hacienda La Camelia</p>
+          <p class="event-detail__desc" data-i18n="ev2_desc">El momento que nos reúne a todos: nos casamos frente a las montañas, al aire libre. Les recomendamos llegar 30 minutos antes para acomodarse con calma.</p>
+          <p class="event-detail__dress" data-i18n="ev2_dress">Dress code: formal</p>
+        </article>
+
+        <img class="divider" src="separador.png" alt="" aria-hidden="true" />
+
+        <!-- Evento 3: recepción y fiesta -->
+        <article class="event-detail">
+          <img class="event-detail__icon" src="copas de vino.png" data-i18n-alt="alt_copas" alt="Ícono de copas de vino" />
+          <h3 class="event-detail__name" data-i18n="ev3_name">Recepción y fiesta</h3>
+          <p class="event-detail__meta" data-i18n="ev3_datetime">Sábado 13 de junio · 6:30 p. m.</p>
+          <p class="event-detail__meta" data-i18n="ev3_place">Salón principal y terraza, Hacienda La Camelia</p>
+          <p class="event-detail__desc" data-i18n="ev3_desc">Cena, brindis y pista de baile hasta la madrugada con orquesta y DJ. Si hay una canción que no puede faltar, cuéntennosla al confirmar su asistencia.</p>
+          <p class="event-detail__dress" data-i18n="ev3_dress">Dress code: formal, el mismo de la ceremonia</p>
+        </article>
+
+        <img class="divider" src="separador.png" alt="" aria-hidden="true" />
+
+        <!-- Evento 4: brunch de despedida (sin línea de dress code) -->
+        <article class="event-detail">
+          <img class="event-detail__icon" src="taza de cafe.png" data-i18n-alt="alt_cafe" alt="Ícono de taza de café" />
+          <h3 class="event-detail__name" data-i18n="ev4_name">Brunch de despedida</h3>
+          <p class="event-detail__meta" data-i18n="ev4_datetime">Domingo 14 de junio · 10:00 a. m.</p>
+          <p class="event-detail__meta" data-i18n="ev4_place">Terraza del café, Hacienda La Camelia</p>
+          <p class="event-detail__desc" data-i18n="ev4_desc">Para cerrar con calma: café recién pasado, arepas y jugos de la región mientras nos despedimos. Vengan como estén, sin afán — los queremos ver antes de que viajen.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. DRESS CODE GENERAL
+         ============================================================ -->
+    <section id="dresscode" class="dresscode">
+      <div class="container reveal">
+        <h2 class="section-title" data-i18n="dc_title">Dress code</h2>
+
+        <div class="dresscode__layout">
+          <!-- Acento vertical decorativo -->
+          <img class="dresscode__palm" src="palma de cera.png" data-i18n-alt="alt_palma" alt="Ilustración en acuarela de una palma de cera" />
+
+          <div class="dresscode__content">
+            <div class="dresscode__columns">
+              <div class="dresscode__col">
+                <h3 data-i18n="dc_col1_title">Hombres</h3>
+                <p data-i18n="dc_col1_text">Traje completo o saco y pantalón en tonos tierra, verde o azul; la corbata es opcional. En la montaña refresca al caer la noche, así que el saco se agradece. Zapatos cómodos: hay senderos de piedra y pasto.</p>
+              </div>
+              <div class="dresscode__col">
+                <h3 data-i18n="dc_col2_title">Mujeres</h3>
+                <p data-i18n="dc_col2_text">Vestido largo o midi en tonos suaves — la paleta de abajo es una buena guía. Recomendamos tacón grueso o plataforma por el pasto, y un chal o abrigo ligero para la noche. Por favor, eviten el blanco.</p>
+              </div>
+            </div>
+
+            <!-- Paleta de colores de ejemplo -->
+            <div class="palette" role="img" aria-label="Paleta de colores / Color palette">
+              <span class="palette__swatch" style="background:#6b7a4e"></span>
+              <span class="palette__swatch" style="background:#a8b98f"></span>
+              <span class="palette__swatch" style="background:#c26e45"></span>
+              <span class="palette__swatch palette__swatch--light" style="background:#f3ead8"></span>
+              <span class="palette__swatch" style="background:#e7b8ba"></span>
+              <span class="palette__swatch" style="background:#d9a441"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. RSVP / CIERRE
+         ============================================================ -->
+    
+
+  </main>
+
+  <!-- Pie de página mínimo -->
+  <footer class="footer">
+    <p data-i18n="footer_text">Vanessa &amp; Devan · Santa Rosa de Cabal · Junio 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+/* ============================================================
+   SITIO DE BODA — HOJA DE ESTILOS
+   Mobile-first. Breakpoint principal: 768px.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   VARIABLES (colores + tipografías)
+   Las variables --font-* las cambia el selector A/B/C en script.js.
+   Por defecto está activa la Opción B (Sacramento / Cormorant / Karla).
+   ------------------------------------------------------------ */
+:root {
+  /* Paleta acuarela — eje cafetero */
+  --color-cream: #f7f2e6;        /* fondo base crema/hueso */
+  --color-cream-card: #fffdf7;   /* fondo de tarjetas */
+  --color-olive: #5c6b3f;        /* verde oliva */
+  --color-sage: #a8b98f;         /* verde salvia */
+  --color-terracotta: #b85c35;   /* terracota / naranja quemado */
+  --color-rose: #e7b8ba;         /* rosa pastel */
+  --color-mustard: #d9a441;      /* amarillo mostaza */
+  --color-ink: #45412f;          /* texto principal (contraste sobre crema) */
+  --color-ink-soft: #6b6551;     /* texto secundario */
+
+  /* Tipografías (Opción B por defecto) */
+  --font-display: "Sacramento", cursive;
+  --font-display-style: normal;
+  --font-subtitle: "Cormorant Garamond", serif;
+  --font-subtitle-style: italic;
+  --font-body: "Karla", sans-serif;
+}
+
+/* ------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-cream);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem; /* mínimo 16px de texto de cuerpo en mobile */
+  font-weight: 300;
+  color: var(--color-ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Textura de papel sutil (grano SVG inline, muy ligero) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23p)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+section {
+  width: 100%;
+  padding: 4rem 1.25rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Títulos de sección */
+.section-title {
+  font-family: var(--font-display);
+  font-style: var(--font-display-style);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 9vw, 3.6rem);
+  color: var(--color-olive);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+/* Botones / enlaces destacados (área táctil mínima ~44px) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.6rem 2rem;
+  border-radius: 999px;
+  transition: opacity 0.25s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn--solid {
+  background-color: var(--color-terracotta);
+  color: var(--color-cream-card);
+}
+
+.btn--outline {
+  border: 1px solid var(--color-terracotta);
+  color: var(--color-terracotta);
+  margin-top: 1rem;
+}
+
+/* Separador decorativo entre bloques */
+.divider {
+  width: min(70vw, 380px);
+  margin: 2.5rem auto;
+}
+
+/* ------------------------------------------------------------
+   FADE-IN AL HACER SCROLL (Intersection Observer)
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   CONTROLES FIJOS: idioma (arriba der.) y tipografía (abajo der.)
+   ------------------------------------------------------------ */
+.lang-switch,
+.font-switch {
+  position: fixed;
+  right: 0.9rem;
+  z-index: 100;
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  background-color: rgba(255, 253, 247, 0.85);
+  border: 1px solid var(--color-sage);
+  border-radius: 999px;
+  backdrop-filter: blur(3px);
+}
+
+.lang-switch {
+  top: 0.9rem;
+}
+
+/* TEMPORAL: selector de tipografía para revisión, quitar cuando decidan */
+.font-switch {
+  bottom: 0.9rem;
+}
+
+.lang-switch button,
+.font-switch button {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-olive);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  /* área táctil mínima de 44px */
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+}
+
+.lang-switch button.active,
+.font-switch button.active {
+  background-color: var(--color-olive);
+  color: var(--color-cream-card);
+}
+
+/* ------------------------------------------------------------
+   1. HERO
+   ------------------------------------------------------------ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5.5rem 1.25rem 3.5rem;
+}
+
+.hero__corner {
+  position: absolute;
+  top: 0;
+  width: min(38vw, 240px);
+}
+
+.hero__corner--left {
+  left: 0;
+}
+
+.hero__corner--right {
+  right: 0;
+}
+
+.hero__names {
+  font-family: var(--font-display);
+  font-style: var(--font-display-style);
+  font-weight: 400;
+  font-size: clamp(3rem, 13vw, 5.5rem);
+  color: var(--color-terracotta);
+  line-height: 1.15;
+}
+
+.hero__date,
+.hero__location {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-size: clamp(1.15rem, 4.5vw, 1.6rem);
+  color: var(--color-ink-soft);
+  margin-top: 0.4rem;
+}
+
+.hero__illustration {
+  width: min(82vw, 520px);
+  margin: 1.5rem auto 0;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-olive);
+  opacity: 0.6;
+  font-size: 1.4rem;
+}
+
+/* ------------------------------------------------------------
+   2. BIENVENIDA / INFO GENERAL
+   ------------------------------------------------------------ */
+.welcome__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.welcome__text {
+  max-width: 34rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.welcome__accent {
+  width: min(55vw, 240px);
+}
+
+.info-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.info-card {
+  background-color: rgba(255, 253, 247, 0.65);
+  border: 1px solid var(--color-sage);
+  border-radius: 12px;
+  padding: 1.6rem 1.4rem;
+  text-align: center;
+}
+
+.info-card h3 {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--color-olive);
+  margin-bottom: 0.6rem;
+}
+
+.info-card p {
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+}
+
+/* ------------------------------------------------------------
+   3. MAPA
+   ------------------------------------------------------------ */
+.map .container {
+  text-align: center;
+}
+
+.map__image {
+  width: min(92vw, 720px);
+  margin: 0 auto;
+}
+
+.map__caption {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-size: 1.15rem;
+  color: var(--color-ink-soft);
+  margin-top: 1rem;
+}
+
+/* ------------------------------------------------------------
+   4. ITINERARIO
+   ------------------------------------------------------------ */
+.itinerary__days {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.day {
+  text-align: center;
+}
+
+.day__title {
+  font-family: var(--font-display);
+  font-style: var(--font-display-style);
+  font-weight: 400;
+  font-size: 2.1rem;
+  color: var(--color-terracotta);
+  line-height: 1.2;
+}
+
+.day__date {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-size: 1.15rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 1.2rem;
+}
+
+.day__events {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.day__events li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: left;
+}
+
+.day__events img {
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.event__time {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-olive);
+  white-space: nowrap;
+}
+
+.event__name {
+  font-size: 1rem;
+}
+
+/* ------------------------------------------------------------
+   5. DETALLE DE EVENTOS
+   ------------------------------------------------------------ */
+.event-detail {
+  text-align: center;
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+.event-detail__icon {
+  width: 72px;
+  margin: 0 auto 0.6rem;
+}
+
+.event-detail__name {
+  font-family: var(--font-display);
+  font-style: var(--font-display-style);
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--color-olive);
+  line-height: 1.2;
+}
+
+.event-detail__meta {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-size: 1.1rem;
+  color: var(--color-terracotta);
+}
+
+.event-detail__desc {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+}
+
+.event-detail__dress {
+  margin-top: 0.7rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+}
+
+/* ------------------------------------------------------------
+   6. DRESS CODE GENERAL
+   ------------------------------------------------------------ */
+.dresscode__layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dresscode__palm {
+  width: min(40vw, 170px);
+}
+
+.dresscode__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.dresscode__col h3 {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--color-terracotta);
+  margin-bottom: 0.5rem;
+}
+
+.dresscode__col p {
+  font-size: 1rem;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+/* Fila de círculos con la paleta de ejemplo */
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.palette__swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.palette__swatch--light {
+  border: 1px solid var(--color-sage);
+}
+
+/* ------------------------------------------------------------
+   7. RSVP / CIERRE
+   ------------------------------------------------------------ */
+.rsvp .container {
+  text-align: center;
+}
+
+.rsvp__text {
+  max-width: 30rem;
+  margin: 0 auto 1.6rem;
+  font-size: 1.02rem;
+}
+
+.rsvp__extra {
+  margin-top: 1.6rem;
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
+}
+
+/* Separador invertido como cierre decorativo
+   (reemplazar por stamp.png cuando esté lista la ilustración de estampilla) */
+.divider--closing {
+  transform: scaleY(-1);
+  margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------
+   PIE DE PÁGINA
+   ------------------------------------------------------------ */
+.footer {
+  text-align: center;
+  /* padding inferior amplio para que el selector de tipografía fijo
+     (abajo a la derecha) no tape el contenido al final de la página */
+  padding: 2rem 1.25rem 6rem;
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+}
+
+/* ============================================================
+   DESKTOP / TABLET (≥ 768px)
+   ============================================================ */
+@media (min-width: 768px) {
+  section {
+    padding: 5.5rem 2rem;
+  }
+
+  /* Bienvenida: texto + colibrí lado a lado */
+  .welcome__intro {
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+    text-align: left;
+  }
+
+  .welcome__text {
+    text-align: left;
+  }
+
+  .welcome__accent {
+    width: 240px;
+  }
+
+  /* Info práctica en 3 columnas */
+  .info-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Itinerario en 3 columnas */
+  .itinerary__days {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Íconos un poco más pequeños para que las 3 columnas
+     respiren en anchos de tablet (~768px) */
+  .day__events img {
+    width: 36px;
+  }
+
+  /* Dress code: palma vertical al lado del contenido */
+  .dresscode__layout {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .dresscode__palm {
+    width: 200px;
+    flex-shrink: 0;
+  }
+
+  .dresscode__columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
