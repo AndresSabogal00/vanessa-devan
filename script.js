@@ -2,44 +2,50 @@
    SITIO DE BODA — SCRIPT
    1) Traducciones ES/EN
    2) Selector de idioma con detección + localStorage
-   3) TEMPORAL: selector de tipografía A/B/C para revisión
-   4) Fade-in de secciones con Intersection Observer
+   3) Fade-in de secciones con Intersection Observer
+
+   Tipografías: los novios eligieron la Opción B (Sacramento /
+   Cormorant Garamond itálica / Karla). El selector A/B/C se quitó;
+   las variables --font-* quedaron fijas en :root (styles.css).
    ============================================================ */
 
 /* ------------------------------------------------------------
    1. TRADUCCIONES
+   Contenido real de la boda de Vanessa & Devan.
+   Pendientes por completar (marcados en index.html):
+   - URL real de la Hacienda El Jardín (venue de las bodas y la recepción)
+   - Dato de contacto de "Access" (en el doc original figura como XXX)
    ------------------------------------------------------------ */
-// Todo el contenido de este archivo es simulado/ficticio para
-// visualizar el diseño. Reemplazar con la información real de la
-// pareja antes de publicar.
 const translations = {
   es: {
     /* --- Hero --- */
     hero_names: "Vanessa & Devan",
-    hero_date: "12 – 14 de junio de 2026",
+    hero_date: "23 – 26 de septiembre de 2026",
     hero_location: "Santa Rosa de Cabal, Colombia",
-    alt_hacienda: "Ilustración en acuarela de la hacienda entre las montañas",
+    alt_hacienda: "Ilustración en acuarela de una casita cafetera entre las montañas",
 
-    /* --- Bienvenida / info general --- */
+    /* --- Bienvenida --- */
     welcome_title: "¡Nos casamos!",
     welcome_text:
-      "Nos hace muchísima ilusión celebrar nuestro matrimonio rodeados de las personas que más queremos, en el corazón del Eje Cafetero. Prepárense para un fin de semana de café, montañas y mucha fiesta: aquí encontrarán todo lo que necesitan para acompañarnos.",
+      "Nos emociona muchísimo celebrar nuestra boda con nuestra familia y amigos en el corazón de la hermosa región cafetera de Colombia. Prepárense para un fin de semana inolvidable lleno de paisajes espectaculares, café, buena música y mucho baile. Aquí encontrarán todo lo que necesitan para planear su viaje y celebrar con nosotros.",
     alt_colibri: "Ilustración en acuarela de un colibrí y una orquídea",
-    info1_title: "Dónde hospedarse",
+
+    /* --- Info práctica --- */
+    info1_title: "Dónde quedarse",
+    info1_subtitle: "Hotel Finca del Café",
     info1_text:
-      "Recomendamos el Hotel Boutique Los Guaduales, a 10 minutos de la hacienda y con vista a los cafetales. Al reservar, mencionen la boda de Vanessa y Devan para acceder a la tarifa especial de grupo.",
+      "Enclavado en el corazón de la región cafetera de Colombia, el Hotel Finca del Café está rodeado de naturaleza exuberante y campo tranquilo. Despierten con el aire fresco de la montaña, disfruten café cultivado en la zona y relájense mientras celebramos juntos un fin de semana inolvidable.",
+    info1_button: "Más información",
     info2_title: "Cómo llegar",
     info2_text:
-      "El aeropuerto más cercano es el Internacional Matecaña de Pereira (PEI), a unos 45 minutos en carro. Habrá transporte compartido desde Pereira y desde el parque principal de Santa Rosa antes de cada evento.",
-    info2_button: "Reservar transporte",
-    info3_title: "Antes o después",
+      "El aeropuerto más cercano es el Internacional Matecaña (PEI) en Pereira, a unos 45 minutos. Habrá transporte compartido desde Pereira entre el hotel y cada evento de la boda. Una vez que tengan sus vuelos, hagan clic abajo para compartir los datos y nosotros nos encargamos del resto.",
+    info2_button: "Comparte los datos de tu vuelo",
+    info3_title: "Quédate unos días",
     info3_text:
-      "Si quieren quedarse unos días más, la agencia Rutas del Cafetal organiza salidas a los termales, fincas cafeteras y el Valle de Cocora. Escríbanles de nuestra parte y armamos plan.",
+      "Si quieren quedarse unos días más, nuestros amigos de Access organizan tours por la región cafetera: termales, fincas de café y el Valle de Cocora. Solo díganles que van de nuestra parte.",
 
     /* --- Mapa --- */
-    map_title: "El lugar",
-    map_caption: "Valle de Santa Rosa de Cabal, Risaralda — Eje Cafetero colombiano",
-    alt_mapa: "Mapa ilustrado en acuarela del valle de Santa Rosa de Cabal",
+    alt_mapa: "Mapa ilustrado: del aeropuerto de Pereira al Hotel Finca del Café y la Hacienda El Jardín",
 
     /* --- Itinerario --- */
     itin_title: "Itinerario",
@@ -47,174 +53,210 @@ const translations = {
     alt_copas: "Ícono de copas de vino",
     alt_orquidea: "Ícono de flor de orquídea",
     day1_title: "Día 1",
-    day1_date: "Viernes, 12 de junio",
-    day1_e1_time: "4:00 p. m.",
-    day1_e1_name: "Llegada y check-in",
-    day1_e2_time: "7:00 p. m.",
-    day1_e2_name: "Cóctel de bienvenida",
+    day1_date: "Jueves 24 de septiembre",
+    day1_e1_time: "10:00 a. m.",
+    day1_e1_name: "Haldi",
+    day1_e2_time: "Mediodía",
+    day1_e2_name: "Tour opcional",
+    day1_e3_time: "5:00 p. m.",
+    day1_e3_name: "Sangeet",
     day2_title: "Día 2",
-    day2_date: "Sábado, 13 de junio",
-    day2_e1_time: "9:00 a. m.",
-    day2_e1_name: "Desayuno cafetero",
-    day2_e2_time: "4:00 p. m.",
-    day2_e2_name: "Ceremonia",
-    day2_e3_time: "6:30 p. m.",
-    day2_e3_name: "Recepción y fiesta",
+    day2_date: "Viernes 25 de septiembre",
+    day2_e1_time: "10:00 a. m.",
+    day2_e1_name: "Barat y ceremonia hindú",
+    day2_e2_time: "1:00 p. m.",
+    day2_e2_name: "Almuerzo",
+    day2_e3_time: "3:00 p. m.",
+    day2_e3_name: "Ceremonia católica",
     day3_title: "Día 3",
-    day3_date: "Domingo, 14 de junio",
-    day3_e1_time: "10:00 a. m.",
-    day3_e1_name: "Brunch de despedida",
-    day3_e2_time: "1:00 p. m.",
-    day3_e2_name: "Hasta pronto",
+    day3_date: "Sábado 26 de septiembre",
+    day3_e1_time: "9:00 a. m.",
+    day3_e1_name: "Tour opcional (mañana y mediodía)",
+    day3_e2_time: "5:00 p. m.",
+    day3_e2_name: "Recepción",
 
-    /* --- Detalle de eventos --- */
+    /* --- Los eventos --- */
     events_title: "Los eventos",
-    ev1_name: "Cóctel de bienvenida",
-    ev1_datetime: "Viernes 12 de junio · 7:00 p. m.",
-    ev1_place: "Jardín central, Hacienda La Camelia",
-    ev1_desc:
-      "Abrimos el fin de semana con un brindis al atardecer entre guaduas y farolitos. Habrá picadas de la región, música en vivo y todo el tiempo del mundo para ponernos al día.",
-    ev1_dress: "Dress code: casual elegante",
-    ev2_name: "Ceremonia",
-    ev2_datetime: "Sábado 13 de junio · 4:00 p. m.",
-    ev2_place: "Capilla al aire libre, Hacienda La Camelia",
-    ev2_desc:
-      "El momento que nos reúne a todos: nos casamos frente a las montañas, al aire libre. Les recomendamos llegar 30 minutos antes para acomodarse con calma.",
-    ev2_dress: "Dress code: formal",
-    ev3_name: "Recepción y fiesta",
-    ev3_datetime: "Sábado 13 de junio · 6:30 p. m.",
-    ev3_place: "Salón principal y terraza, Hacienda La Camelia",
-    ev3_desc:
-      "Cena, brindis y pista de baile hasta la madrugada con orquesta y DJ. Si hay una canción que no puede faltar, cuéntennosla al confirmar su asistencia.",
-    ev3_dress: "Dress code: formal, el mismo de la ceremonia",
-    ev4_name: "Brunch de despedida",
-    ev4_datetime: "Domingo 14 de junio · 10:00 a. m.",
-    ev4_place: "Terraza del café, Hacienda La Camelia",
-    ev4_desc:
-      "Para cerrar con calma: café recién pasado, arepas y jugos de la región mientras nos despedimos. Vengan como estén, sin afán — los queremos ver antes de que viajen.",
+    /* Haldi */
+    ev_haldi_name: "Haldi",
+    ev_haldi_meta1: "Jueves 24 de septiembre · 10:00 a. m.",
+    ev_haldi_meta2: "Casa Típica, Hotel Finca del Café",
+    ev_haldi_desc:
+      "El Haldi es una alegre tradición india que marca el comienzo de un nuevo capítulo; una celebración del amor y la familia antes de que todo empiece. Juntos, nuestros seres queridos bendecirán a los novios con una pasta de cúrcuma, un gesto que busca traer felicidad, prosperidad y buena fortuna a nuestro matrimonio. Entre los colores vibrantes, las risas y las bendiciones, es la manera perfecta de arrancar nuestro fin de semana de boda.",
+    ev_haldi_dress: "Atuendo: colores cálidos de amanecer. ¡Cómodo y colorido!",
+    alt_haldi: "Ilustración en acuarela de la ceremonia Haldi",
+    /* Baile y Sangeet */
+    ev_sangeet_name: "Baile y Sangeet",
+    ev_sangeet_meta1: "Jueves 24 de septiembre · 5:00 p. m.",
+    ev_sangeet_meta2: "Patio de la Casa Típica, Hotel Finca del Café",
+    ev_sangeet_desc:
+      "Vive lo mejor de India y Colombia en una sola noche inolvidable. Desde las vibrantes tradiciones del Sangeet y el Garba hasta los ritmos festivos de la cumbia colombiana, dos culturas se unen en una celebración de amor, familia, música y baile.",
+    ev_sangeet_dress: "Atuendo: vestidos coloridos y vaporosos, en telas ligeras y listas para bailar. ¡Festivo y fresco!",
+    alt_sangeet: "Ilustración en acuarela de baile de Sangeet y cumbia",
+    /* Las bodas (hindú + católica) */
+    ev_wed_name: "Las bodas",
+    ev_wed_meta1: "Viernes 25 de septiembre · 10:00 a. m. a 5:00 p. m.",
+    ev_wed_venue: "Hacienda El Jardín",
+    ev_wed_buses: "Los buses salen a las 8:45 a. m. y regresan al hotel a las 6:00 p. m.",
+    ev_wed_hindu_title: "Ceremonia hindú",
+    ev_wed_hindu_desc:
+      "Arraigada en siglos de tradición y celebrada en presencia de todos los que amamos, nuestra ceremonia hindú es donde dos familias se vuelven una. Entre las verdes colinas de Colombia, los rituales ancestrales se despliegan bajo el cielo abierto; cada paso una promesa silenciosa, cada bendición un hilo que une nuestros dos mundos.",
+    alt_hindu: "Ilustración en acuarela de un mandap para la ceremonia hindú",
+    ev_wed_catholic_title: "Ceremonia católica",
+    ev_wed_catholic_desc:
+      "En la quietud de un bosque de guadua, nuestra ceremonia católica es una celebración sagrada de fe, amor y las promesas que llevaremos toda la vida. Rodeados de las personas que más queremos, intercambiaremos nuestros votos y comenzaremos juntos el camino del matrimonio.",
+    alt_catholic: "Ilustración en acuarela de un camino en un bosque de guadua",
+    ev_wed_dress:
+      "Atuendo: formal y festivo. Para la ceremonia hindú son igual de bienvenidos el atuendo tradicional indio, el formal occidental o una mezcla de ambos. Pueden quedarse con el mismo atuendo para la ceremonia católica que sigue; la familia cercana y el cortejo pueden preferir cambiarse a un formal de jardín o cóctel.",
+    /* Recepción */
+    ev_rec_name: "Recepción",
+    ev_rec_meta1: "Sábado 26 de septiembre · 5:30 p. m. a 12:00 a. m.",
+    ev_rec_venue: "Hacienda El Jardín",
+    ev_rec_buses: "Los buses salen a las 4:45 p. m. y regresan al hotel a las 12:00 a. m.",
+    ev_rec_desc:
+      "Cuando cae el sol, la celebración cobra vida. Una banda increíble, una pista llena de energía y un ambiente eléctrico preparan el escenario para una noche de baile sin parar. Ritmos latinos en vivo y música de alta energía mantendrán la fiesta hasta altas horas, cerrando nuestro fin de semana de boda por todo lo alto.",
+    ev_rec_dress: "Atuendo: ¡con todo! Glamour, diversión y lista para la fiesta. Piensen en lentejuelas, brillo, colores intensos y su mejor look de noche; eso sí, algo con lo que puedan bailar.",
+    alt_reception: "Ilustración en acuarela de la fiesta de recepción de noche",
 
-    /* --- Dress code general --- */
-    dc_title: "Dress code",
-    dc_col1_title: "Hombres",
-    dc_col1_text:
-      "Traje completo o saco y pantalón en tonos tierra, verde o azul; la corbata es opcional. En la montaña refresca al caer la noche, así que el saco se agradece. Zapatos cómodos: hay senderos de piedra y pasto.",
-    dc_col2_title: "Mujeres",
-    dc_col2_text:
-      "Vestido largo o midi en tonos suaves — la paleta de abajo es una buena guía. Recomendamos tacón grueso o plataforma por el pasto, y un chal o abrigo ligero para la noche. Por favor, eviten el blanco.",
-    alt_palma: "Ilustración en acuarela de una palma de cera",
+    /* --- Qué traer --- */
+    bring_title: "Qué traer",
+    bring_1: "Dandiya",
+    bring_2: "Repelente de insectos",
+    bring_3: "Zapatos cómodos",
+    bring_4: "Protector solar",
+    bring_5: "Chaqueta ligera",
+    bring_6: "Efectivo en pesos (COP)",
 
-    /* --- RSVP / cierre --- */
-    rsvp_title: "Confirma tu asistencia",
-    rsvp_text:
-      "Nada nos haría más felices que contar con ustedes. Por favor confirmen su asistencia antes del 1 de mayo de 2026 para poder reservar su lugar en la mesa (y en la pista de baile).",
-    rsvp_button: "Confirmar asistencia",
-    rsvp_extra:
-      "El mejor regalo es que nos acompañen. Si además quieren tener un detalle, el día de la boda habrá lluvia de sobres, o pueden aportar a la luna de miel: IBAN DE89 3704 0044 0532 0130 00.",
+    /* --- Contacto --- */
+    contact_title: "Contacto",
+    contact_text1:
+      "Para preguntas sobre transporte, hotel o el itinerario del fin de semana, escríbanle a Access.",
+    contact_text2_pre: "Para cualquier otra cosa, no duden en contactarnos directamente al",
+    contact_text2_or: "o al",
 
     /* --- Pie de página --- */
-    footer_text: "Vanessa & Devan · Santa Rosa de Cabal · Junio 2026",
+    footer_text: "Vanessa & Devan · Santa Rosa de Cabal · 2026",
   },
 
   en: {
     /* --- Hero --- */
     hero_names: "Vanessa & Devan",
-    hero_date: "June 12 – 14, 2026",
+    hero_date: "September 23 – 26, 2026",
     hero_location: "Santa Rosa de Cabal, Colombia",
-    alt_hacienda: "Watercolor illustration of the hacienda in the mountains",
+    alt_hacienda: "Watercolor illustration of a coffee-country house in the mountains",
 
-    /* --- Welcome / general info --- */
+    /* --- Welcome --- */
     welcome_title: "We're getting married!",
     welcome_text:
-      "We couldn't be more excited to celebrate our wedding surrounded by the people we love most, in the heart of Colombia's coffee region. Get ready for a weekend of coffee, mountains and plenty of dancing — everything you need to join us is right here.",
+      "We're so excited to celebrate our wedding with our family and friends in the heart of Colombia's beautiful coffee region. Get ready for an unforgettable weekend filled with beautiful scenery, coffee, great music, and plenty of dancing. Everything you need to plan your trip and celebrate with us can be found right here.",
     alt_colibri: "Watercolor illustration of a hummingbird and an orchid",
+
+    /* --- Practical info --- */
     info1_title: "Where to stay",
+    info1_subtitle: "Hotel Finca del Café",
     info1_text:
-      "We recommend Hotel Boutique Los Guaduales, ten minutes from the hacienda with views over the coffee fields. Mention Vanessa and Devan's wedding when booking to get the group rate.",
+      "Nestled in the heart of Colombia's beautiful coffee region, Hotel Finca del Café is surrounded by lush scenery and peaceful countryside. Wake up to fresh mountain air, enjoy locally grown coffee, and relax as we celebrate an unforgettable weekend together.",
+    info1_button: "More information",
     info2_title: "Getting there",
     info2_text:
-      "The closest airport is Matecaña International in Pereira (PEI), about 45 minutes away by car. Shared shuttles will run from Pereira and from Santa Rosa's main square before each event.",
-    info2_button: "Book transport",
+      "The nearest airport is Matecaña International (PEI) in Pereira, about 45 minutes away. Shared transportation will run from Pereira between the hotel and every wedding event. Once your travel is booked, click below to share your flight details and we'll take it from there.",
+    info2_button: "Share your flight details",
     info3_title: "Make it a trip",
     info3_text:
-      "If you'd like to stay a few extra days, our friends at Rutas del Cafetal run tours to the hot springs, coffee farms and the Cocora Valley. Tell them we sent you.",
+      "If you'd like to stay a few extra days, our friends at Access run tours through the coffee region: hot springs, coffee farms, and the Cocora Valley. Just tell them we sent you.",
 
     /* --- Map --- */
-    map_title: "The place",
-    map_caption: "Santa Rosa de Cabal valley, Risaralda — Colombia's coffee region",
-    alt_mapa: "Watercolor illustrated map of the Santa Rosa de Cabal valley",
+    alt_mapa: "Illustrated map: from Pereira airport to Hotel Finca del Café and Hacienda El Jardín",
 
-    /* --- Itinerary --- */
+    /* --- Schedule --- */
     itin_title: "Schedule",
     alt_cafe: "Coffee cup icon",
     alt_copas: "Wine glasses icon",
     alt_orquidea: "Orchid flower icon",
     day1_title: "Day 1",
-    day1_date: "Friday, June 12",
-    day1_e1_time: "4:00 PM",
-    day1_e1_name: "Arrival & check-in",
-    day1_e2_time: "7:00 PM",
-    day1_e2_name: "Welcome cocktail",
+    day1_date: "Thursday, September 24",
+    day1_e1_time: "10:00 AM",
+    day1_e1_name: "Haldi",
+    day1_e2_time: "Midday",
+    day1_e2_name: "Optional tour",
+    day1_e3_time: "5:00 PM",
+    day1_e3_name: "Sangeet",
     day2_title: "Day 2",
-    day2_date: "Saturday, June 13",
-    day2_e1_time: "9:00 AM",
-    day2_e1_name: "Coffee-farm breakfast",
-    day2_e2_time: "4:00 PM",
-    day2_e2_name: "Ceremony",
-    day2_e3_time: "6:30 PM",
-    day2_e3_name: "Reception & party",
+    day2_date: "Friday, September 25",
+    day2_e1_time: "10:00 AM",
+    day2_e1_name: "Barat & Hindu ceremony",
+    day2_e2_time: "1:00 PM",
+    day2_e2_name: "Lunch",
+    day2_e3_time: "3:00 PM",
+    day2_e3_name: "Catholic ceremony",
     day3_title: "Day 3",
-    day3_date: "Sunday, June 14",
-    day3_e1_time: "10:00 AM",
-    day3_e1_name: "Farewell brunch",
-    day3_e2_time: "1:00 PM",
-    day3_e2_name: "See you soon",
+    day3_date: "Saturday, September 26",
+    day3_e1_time: "9:00 AM",
+    day3_e1_name: "Optional morning & midday tour",
+    day3_e2_time: "5:00 PM",
+    day3_e2_name: "Reception",
 
-    /* --- Event details --- */
-    events_title: "The events",
-    ev1_name: "Welcome cocktail",
-    ev1_datetime: "Friday, June 12 · 7:00 PM",
-    ev1_place: "Main garden, Hacienda La Camelia",
-    ev1_desc:
-      "We kick off the weekend with a sunset toast among bamboo and string lights. Expect regional bites, live music and all the time in the world to catch up.",
-    ev1_dress: "Dress code: smart casual",
-    ev2_name: "Ceremony",
-    ev2_datetime: "Saturday, June 13 · 4:00 PM",
-    ev2_place: "Open-air chapel, Hacienda La Camelia",
-    ev2_desc:
-      "The moment that brings us all together: we're getting married outdoors, facing the mountains. Please arrive 30 minutes early so you can settle in.",
-    ev2_dress: "Dress code: formal",
-    ev3_name: "Reception & party",
-    ev3_datetime: "Saturday, June 13 · 6:30 PM",
-    ev3_place: "Main hall & terrace, Hacienda La Camelia",
-    ev3_desc:
-      "Dinner, toasts and a dance floor open until late, with a live band and DJ. If there's a song we just can't skip, tell us when you RSVP.",
-    ev3_dress: "Dress code: formal — same as the ceremony",
-    ev4_name: "Farewell brunch",
-    ev4_datetime: "Sunday, June 14 · 10:00 AM",
-    ev4_place: "Coffee terrace, Hacienda La Camelia",
-    ev4_desc:
-      "A slow goodbye: freshly brewed coffee, arepas and local juices while we see everyone off. Come as you are — we want one last hug before you travel.",
+    /* --- The Events --- */
+    events_title: "The Events",
+    /* Haldi */
+    ev_haldi_name: "Haldi",
+    ev_haldi_meta1: "Thursday, September 24 · 10:00 AM",
+    ev_haldi_meta2: "Casa Típica, Hotel Finca del Café",
+    ev_haldi_desc:
+      "The Haldi is a joyful Indian tradition that marks the beginning of a new chapter; a celebration of love and family before everything else begins. Together, our loved ones will bless the bride and groom with a turmeric paste, a gesture meant to bring happiness, prosperity, and good fortune into our marriage. Between the vibrant colors, the laughter, and the blessings, it's the perfect way to kick off our wedding weekend.",
+    ev_haldi_dress: "Attire: casual sunrise colors. Comfortable and colorful!",
+    alt_haldi: "Watercolor illustration of the Haldi ceremony",
+    /* Baile y Sangeet */
+    ev_sangeet_name: "Baile y Sangeet",
+    ev_sangeet_meta1: "Thursday, September 24 · 5:00 PM",
+    ev_sangeet_meta2: "Casa Típica courtyard, Hotel Finca del Café",
+    ev_sangeet_desc:
+      "Experience the best of India and Colombia in one unforgettable evening. From the vibrant traditions of Sangeet and Garba to the festive rhythms of Colombian cumbia, watch two cultures come together in a celebration of love, family, music, and dance.",
+    ev_sangeet_dress: "Attire: colorful, flowy dresses in light, dance-ready fabrics. Festive and breezy!",
+    alt_sangeet: "Watercolor illustration of Sangeet and cumbia dancing",
+    /* Weddings (Hindu + Catholic) */
+    ev_wed_name: "Weddings",
+    ev_wed_meta1: "Friday, September 25 · 10:00 AM to 5:00 PM",
+    ev_wed_venue: "Hacienda El Jardín",
+    ev_wed_buses: "Buses depart at 8:45 AM and return to the hotel at 6:00 PM.",
+    ev_wed_hindu_title: "Hindu Ceremony",
+    ev_wed_hindu_desc:
+      "Rooted in centuries of tradition and held in the presence of everyone we love, our Hindu wedding ceremony is where two families become one. Amid Colombia's lush green hills, ancient rituals unfold beneath the open sky; each step a quiet promise, each blessing a thread tying our two worlds together.",
+    alt_hindu: "Watercolor illustration of a mandap for the Hindu ceremony",
+    ev_wed_catholic_title: "Catholic Ceremony",
+    ev_wed_catholic_desc:
+      "Held in the quiet stillness of a bamboo forest, our Catholic wedding ceremony is a sacred celebration of faith, love, and the promises we carry for a lifetime. Surrounded by the people we love most, we'll exchange our vows and begin the journey of marriage together.",
+    alt_catholic: "Watercolor illustration of a path through a bamboo forest",
+    ev_wed_dress:
+      "Attire: formal festive attire. Traditional Indian wear, Western formal, or a mix of both are all equally welcome for the Hindu ceremony. Feel free to stay in the same outfit for the Catholic ceremony that follows; close family and the wedding party may choose to change into garden or cocktail formal instead.",
+    /* Reception */
+    ev_rec_name: "Reception",
+    ev_rec_meta1: "Saturday, September 26 · 5:30 PM to 12:00 AM",
+    ev_rec_venue: "Hacienda El Jardín",
+    ev_rec_buses: "Buses depart at 4:45 PM and return to the hotel at 12:00 AM.",
+    ev_rec_desc:
+      "As the sun sets, the celebration comes alive. An incredible band, an energetic dance floor, and an electric atmosphere set the stage for a night of nonstop dancing. Soulful live Latin rhythms and high-energy music will keep the party going late into the night, closing out our wedding weekend in unforgettable style.",
+    ev_rec_dress: "Attire: go all out! Glam, fun, and party-ready. Think sequins, sparkle, bold colors, and your best night-out look; just make sure it's something you can dance in.",
+    alt_reception: "Watercolor illustration of the evening reception party",
 
-    /* --- General dress code --- */
-    dc_title: "Dress code",
-    dc_col1_title: "Men",
-    dc_col1_text:
-      "A full suit or a jacket-and-trousers combination in earth, green or blue tones; ties are optional. Mountain evenings get cool, so you'll be glad to have the jacket. Comfortable shoes are wise — there are stone paths and grass.",
-    dc_col2_title: "Women",
-    dc_col2_text:
-      "A long or midi dress in soft tones — the palette below is a good guide. We suggest block heels or platforms for the grass, plus a shawl or light coat for the evening. Please avoid white.",
-    alt_palma: "Watercolor illustration of a wax palm",
+    /* --- What to bring --- */
+    bring_title: "What to bring",
+    bring_1: "Dandiya",
+    bring_2: "Bug spray",
+    bring_3: "Comfortable shoes",
+    bring_4: "Sunscreen",
+    bring_5: "Light jacket",
+    bring_6: "Cash (COP)",
 
-    /* --- RSVP / closing --- */
-    rsvp_title: "RSVP",
-    rsvp_text:
-      "Nothing would make us happier than having you there. Please confirm by May 1, 2026 so we can save your seat at the table (and on the dance floor).",
-    rsvp_button: "Confirm attendance",
-    rsvp_extra:
-      "Your presence is the best gift. If you'd also like to give something, there will be an envelope shower on the wedding day, or you can contribute to our honeymoon: IBAN DE89 3704 0044 0532 0130 00.",
+    /* --- Contact --- */
+    contact_title: "Contact",
+    contact_text1:
+      "For questions about transportation, hotel, or the weekend schedule, reach out to Access.",
+    contact_text2_pre: "For anything else, feel free to contact us directly at",
+    contact_text2_or: "or",
 
     /* --- Footer --- */
-    footer_text: "Vanessa & Devan · Santa Rosa de Cabal · June 2026",
+    footer_text: "Vanessa & Devan · Santa Rosa de Cabal · 2026",
   },
 };
 
@@ -278,61 +320,7 @@ document.querySelectorAll(".lang-switch button").forEach((btn) => {
 applyLang(getInitialLang());
 
 /* ------------------------------------------------------------
-   3. TIPOGRAFÍA DE MUESTRA
-   // TEMPORAL: selector de tipografía para revisión, quitar cuando decidan
-   Solo cambia las variables CSS --font-* en :root; no toca el
-   idioma ni el layout. Opción B activa por defecto.
-   ------------------------------------------------------------ */
-const fontOptions = {
-  A: {
-    display: '"Alex Brush", cursive',
-    displayStyle: "normal",
-    subtitle: '"Cormorant Garamond", serif',
-    subtitleStyle: "italic",
-    body: '"Work Sans", sans-serif',
-  },
-  B: {
-    display: '"Sacramento", cursive',
-    displayStyle: "normal",
-    subtitle: '"Cormorant Garamond", serif',
-    subtitleStyle: "italic",
-    body: '"Karla", sans-serif',
-  },
-  C: {
-    display: '"Cormorant Garamond", serif',
-    displayStyle: "italic",
-    subtitle: '"Cormorant Garamond", serif',
-    subtitleStyle: "normal",
-    body: '"Montserrat", sans-serif',
-  },
-};
-
-function applyFont(optionKey) {
-  const option = fontOptions[optionKey];
-  if (!option) return;
-
-  const rootStyle = document.documentElement.style;
-  rootStyle.setProperty("--font-display", option.display);
-  rootStyle.setProperty("--font-display-style", option.displayStyle);
-  rootStyle.setProperty("--font-subtitle", option.subtitle);
-  rootStyle.setProperty("--font-subtitle-style", option.subtitleStyle);
-  rootStyle.setProperty("--font-body", option.body);
-
-  document.querySelectorAll(".font-switch button").forEach((btn) => {
-    const isActive = btn.dataset.font === optionKey;
-    btn.classList.toggle("active", isActive);
-    btn.setAttribute("aria-pressed", String(isActive));
-  });
-}
-
-document.querySelectorAll(".font-switch button").forEach((btn) => {
-  btn.addEventListener("click", () => applyFont(btn.dataset.font));
-});
-
-applyFont("B"); // Opción B por defecto al cargar
-
-/* ------------------------------------------------------------
-   4. FADE-IN SUAVE AL HACER SCROLL (Intersection Observer)
+   3. FADE-IN SUAVE AL HACER SCROLL (Intersection Observer)
    ------------------------------------------------------------ */
 const revealElements = document.querySelectorAll(".reveal");
 

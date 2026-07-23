@@ -1,12 +1,11 @@
 /* ============================================================
    SITIO DE BODA — HOJA DE ESTILOS
    Mobile-first. Breakpoint principal: 768px.
+   Tipografía fija: Opción B (Sacramento / Cormorant itálica / Karla).
    ============================================================ */
 
 /* ------------------------------------------------------------
    VARIABLES (colores + tipografías)
-   Las variables --font-* las cambia el selector A/B/C en script.js.
-   Por defecto está activa la Opción B (Sacramento / Cormorant / Karla).
    ------------------------------------------------------------ */
 :root {
   /* Paleta acuarela — eje cafetero */
@@ -20,7 +19,7 @@
   --color-ink: #45412f;          /* texto principal (contraste sobre crema) */
   --color-ink-soft: #6b6551;     /* texto secundario */
 
-  /* Tipografías (Opción B por defecto) */
+  /* Tipografías — Opción B elegida por los novios */
   --font-display: "Sacramento", cursive;
   --font-display-style: normal;
   --font-subtitle: "Cormorant Garamond", serif;
@@ -151,11 +150,11 @@ section {
 }
 
 /* ------------------------------------------------------------
-   CONTROLES FIJOS: idioma (arriba der.) y tipografía (abajo der.)
+   CONTROL FIJO: selector de idioma (arriba derecha)
    ------------------------------------------------------------ */
-.lang-switch,
-.font-switch {
+.lang-switch {
   position: fixed;
+  top: 0.9rem;
   right: 0.9rem;
   z-index: 100;
   display: flex;
@@ -167,17 +166,7 @@ section {
   backdrop-filter: blur(3px);
 }
 
-.lang-switch {
-  top: 0.9rem;
-}
-
-/* TEMPORAL: selector de tipografía para revisión, quitar cuando decidan */
-.font-switch {
-  bottom: 0.9rem;
-}
-
-.lang-switch button,
-.font-switch button {
+.lang-switch button {
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
@@ -192,8 +181,7 @@ section {
   cursor: pointer;
 }
 
-.lang-switch button.active,
-.font-switch button.active {
+.lang-switch button.active {
   background-color: var(--color-olive);
   color: var(--color-cream-card);
 }
@@ -272,7 +260,7 @@ section {
 }
 
 .welcome__text {
-  max-width: 34rem;
+  max-width: 40rem;
   text-align: center;
   font-size: 1.05rem;
 }
@@ -293,6 +281,8 @@ section {
   border-radius: 12px;
   padding: 1.6rem 1.4rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .info-card h3 {
@@ -301,6 +291,15 @@ section {
   font-weight: 600;
   font-size: 1.35rem;
   color: var(--color-olive);
+  margin-bottom: 0.4rem;
+}
+
+.info-card__subtitle {
+  font-family: var(--font-subtitle);
+  font-style: var(--font-subtitle-style);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-terracotta);
   margin-bottom: 0.6rem;
 }
 
@@ -309,24 +308,31 @@ section {
   color: var(--color-ink-soft);
 }
 
+/* Empuja el botón al pie de la tarjeta para alinear las 3 columnas */
+.info-card .btn {
+  margin-top: auto;
+  align-self: center;
+}
+
+.info-card p + .btn {
+  margin-top: 1.2rem;
+}
+
 /* ------------------------------------------------------------
-   3. MAPA
+   3. MAPA ("The place": sólo la imagen, sin título)
    ------------------------------------------------------------ */
+.map {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .map .container {
   text-align: center;
 }
 
 .map__image {
-  width: min(92vw, 720px);
+  width: min(94vw, 760px);
   margin: 0 auto;
-}
-
-.map__caption {
-  font-family: var(--font-subtitle);
-  font-style: var(--font-subtitle-style);
-  font-size: 1.15rem;
-  color: var(--color-ink-soft);
-  margin-top: 1rem;
 }
 
 /* ------------------------------------------------------------
@@ -364,7 +370,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  max-width: 20rem;
+  max-width: 22rem;
   margin: 0 auto;
 }
 
@@ -385,136 +391,175 @@ section {
   font-size: 1rem;
   color: var(--color-olive);
   white-space: nowrap;
+  min-width: 5.5rem;
 }
 
 .event__name {
   font-size: 1rem;
+  font-weight: 400;
 }
 
 /* ------------------------------------------------------------
-   5. DETALLE DE EVENTOS
+   5. LOS EVENTOS (foto + texto, alternando lados en desktop)
    ------------------------------------------------------------ */
-.event-detail {
-  text-align: center;
-  max-width: 34rem;
+.event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: 920px;
   margin: 0 auto;
+  text-align: center;
 }
 
-.event-detail__icon {
-  width: 72px;
-  margin: 0 auto 0.6rem;
+.event__media {
+  flex-shrink: 0;
 }
 
-.event-detail__name {
+/* Fotos pequeñas para no romper el flow (petición de la novia) */
+.event__media img {
+  width: min(78vw, 320px);
+}
+
+.event__title {
   font-family: var(--font-display);
   font-style: var(--font-display-style);
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: var(--color-olive);
   line-height: 1.2;
 }
 
-.event-detail__meta {
+.event__meta {
   font-family: var(--font-subtitle);
   font-style: var(--font-subtitle-style);
   font-size: 1.1rem;
   color: var(--color-terracotta);
 }
 
-.event-detail__desc {
+.event__venue {
+  color: var(--color-terracotta);
+  text-decoration: underline;
+}
+
+.event__logistics {
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  margin-top: 0.3rem;
+}
+
+.event__desc {
   margin-top: 0.8rem;
   font-size: 1rem;
 }
 
-.event-detail__dress {
-  margin-top: 0.7rem;
+.event__dress {
+  margin-top: 0.9rem;
   font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.03em;
   color: var(--color-ink-soft);
 }
 
-/* ------------------------------------------------------------
-   6. DRESS CODE GENERAL
-   ------------------------------------------------------------ */
-.dresscode__layout {
-  display: flex;
+/* Bloque combinado "Las bodas" (hindú + católica) */
+.event--weddings {
   flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.dresscode__palm {
-  width: min(40vw, 170px);
-}
-
-.dresscode__columns {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
   text-align: center;
 }
 
-.dresscode__col h3 {
+.event__body--center {
+  text-align: center;
+}
+
+.ceremonies {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.ceremony {
+  text-align: center;
+}
+
+.ceremony img {
+  width: min(78vw, 320px);
+  margin: 0 auto 0.8rem;
+}
+
+.ceremony__title {
   font-family: var(--font-subtitle);
   font-style: var(--font-subtitle-style);
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--color-terracotta);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
-.dresscode__col p {
-  font-size: 1rem;
-  max-width: 26rem;
-  margin: 0 auto;
-}
-
-/* Fila de círculos con la paleta de ejemplo */
-.palette {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.8rem;
-  margin-top: 2rem;
-}
-
-.palette__swatch {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
-}
-
-.palette__swatch--light {
-  border: 1px solid var(--color-sage);
+.event__dress--center {
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ------------------------------------------------------------
-   7. RSVP / CIERRE
+   6. QUÉ TRAER
    ------------------------------------------------------------ */
-.rsvp .container {
+.bring .container {
   text-align: center;
 }
 
-.rsvp__text {
-  max-width: 30rem;
-  margin: 0 auto 1.6rem;
-  font-size: 1.02rem;
+.bring__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+  max-width: 22rem;
+  margin: 0 auto;
 }
 
-.rsvp__extra {
-  margin-top: 1.6rem;
-  font-family: var(--font-subtitle);
-  font-style: var(--font-subtitle-style);
-  font-size: 1.1rem;
-  color: var(--color-ink-soft);
+.bring__list li {
+  position: relative;
+  padding: 0.7rem 1rem 0.7rem 2.4rem;
+  text-align: left;
+  font-size: 1.05rem;
+  background-color: rgba(255, 253, 247, 0.6);
+  border: 1px solid var(--color-sage);
+  border-radius: 10px;
+}
+
+/* Marcador tipo orquídea */
+.bring__list li::before {
+  content: "✦";
+  position: absolute;
+  left: 1rem;
+  color: var(--color-terracotta);
+}
+
+/* ------------------------------------------------------------
+   7. CONTACTO (cierre)
+   ------------------------------------------------------------ */
+.contact .container {
+  text-align: center;
+}
+
+.contact__text {
+  max-width: 34rem;
+  margin: 0 auto 1rem;
+  font-size: 1.05rem;
+}
+
+.contact__text a {
+  color: var(--color-terracotta);
+  text-decoration: underline;
+  white-space: nowrap;
 }
 
 /* Separador invertido como cierre decorativo
    (reemplazar por stamp.png cuando esté lista la ilustración de estampilla) */
 .divider--closing {
   transform: scaleY(-1);
+  margin-top: 2rem;
   margin-bottom: 0;
 }
 
@@ -523,9 +568,7 @@ section {
    ------------------------------------------------------------ */
 .footer {
   text-align: center;
-  /* padding inferior amplio para que el selector de tipografía fijo
-     (abajo a la derecha) no tape el contenido al final de la página */
-  padding: 2rem 1.25rem 6rem;
+  padding: 2rem 1.25rem 3rem;
   font-family: var(--font-subtitle);
   font-style: var(--font-subtitle-style);
   font-size: 1rem;
@@ -574,20 +617,41 @@ section {
     width: 36px;
   }
 
-  /* Dress code: palma vertical al lado del contenido */
-  .dresscode__layout {
+  /* Eventos: foto + texto lado a lado, alternando lados */
+  .event {
     flex-direction: row;
+    text-align: left;
+    gap: 2.8rem;
     align-items: center;
-    gap: 3rem;
   }
 
-  .dresscode__palm {
-    width: 200px;
-    flex-shrink: 0;
+  .event--reverse {
+    flex-direction: row-reverse;
   }
 
-  .dresscode__columns {
+  .event__body {
+    flex: 1;
+  }
+
+  .event__media img {
+    width: 340px;
+  }
+
+  /* El bloque combinado de bodas sí queda centrado y a lo ancho */
+  .event--weddings {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ceremonies {
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
+    align-items: start;
+  }
+
+  /* Qué traer: dos columnas */
+  .bring__list {
+    grid-template-columns: 1fr 1fr;
+    max-width: 40rem;
   }
 }

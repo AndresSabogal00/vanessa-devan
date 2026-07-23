@@ -15,6 +15,12 @@
   />
 
   <link rel="stylesheet" href="styles.css" />
+<style id="__shot">
+/* SOLO PARA CAPTURA: neutraliza alturas dependientes del viewport */
+.hero{min-height:0 !important; padding-top:4rem !important; padding-bottom:3rem !important;}
+.hero__scroll{display:none !important;}
+body::before{display:none !important;}
+</style>
 </head>
 <body>
 
@@ -189,7 +195,7 @@
             <img src="ceremoniahaldi.png" data-i18n-alt="alt_haldi" alt="Ilustración en acuarela de la ceremonia Haldi" />
           </div>
           <div class="event__body">
-            <h3 class="event__title" data-i18n="ev_haldi_name">Haldi</h3>
+            <h3 class="event__name" data-i18n="ev_haldi_name">Haldi</h3>
             <p class="event__meta" data-i18n="ev_haldi_meta1">Jueves 24 de septiembre · 10:00 a. m.</p>
             <p class="event__meta" data-i18n="ev_haldi_meta2">Casa Típica, Hotel Finca del Café</p>
             <p class="event__desc" data-i18n="ev_haldi_desc">El Haldi es una alegre tradición india que marca el comienzo de un nuevo capítulo; una celebración del amor y la familia antes de que todo empiece. Juntos, nuestros seres queridos bendecirán a los novios con una pasta de cúrcuma, un gesto que busca traer felicidad, prosperidad y buena fortuna a nuestro matrimonio. Entre los colores vibrantes, las risas y las bendiciones, es la manera perfecta de arrancar nuestro fin de semana de boda.</p>
@@ -205,7 +211,7 @@
             <img src="baileysangeet.png" data-i18n-alt="alt_sangeet" alt="Ilustración en acuarela de baile de Sangeet y cumbia" />
           </div>
           <div class="event__body">
-            <h3 class="event__title" data-i18n="ev_sangeet_name">Baile y Sangeet</h3>
+            <h3 class="event__name" data-i18n="ev_sangeet_name">Baile y Sangeet</h3>
             <p class="event__meta" data-i18n="ev_sangeet_meta1">Jueves 24 de septiembre · 5:00 p. m.</p>
             <p class="event__meta" data-i18n="ev_sangeet_meta2">Patio de la Casa Típica, Hotel Finca del Café</p>
             <p class="event__desc" data-i18n="ev_sangeet_desc">Vive lo mejor de India y Colombia en una sola noche inolvidable. Desde las vibrantes tradiciones del Sangeet y el Garba hasta los ritmos festivos de la cumbia colombiana, dos culturas se unen en una celebración de amor, familia, música y baile.</p>
@@ -218,9 +224,10 @@
         <!-- Las bodas: bloque combinado (viernes) con ceremonia hindú + católica -->
         <article class="event event--weddings">
           <div class="event__body event__body--center">
-            <h3 class="event__title" data-i18n="ev_wed_name">Las bodas</h3>
+            <h3 class="event__name" data-i18n="ev_wed_name">Las bodas</h3>
             <p class="event__meta" data-i18n="ev_wed_meta1">Viernes 25 de septiembre · 10:00 a. m. a 5:00 p. m.</p>
-            <p class="event__meta"><a class="event__venue" href="https://www.haciendaeljardin.com.co/" target="_blank" rel="noopener noreferrer" data-i18n="ev_wed_venue">Hacienda El Jardín</a></p>
+            <!-- Falta URL real de la Hacienda El Jardín: reemplazar href="#" cuando la tengan -->
+            <p class="event__meta"><a class="event__venue" href="#" data-i18n="ev_wed_venue">Hacienda El Jardín</a></p>
             <p class="event__logistics" data-i18n="ev_wed_buses">Los buses salen a las 8:45 a. m. y regresan al hotel a las 6:00 p. m.</p>
           </div>
 
@@ -231,7 +238,7 @@
               <p class="event__desc" data-i18n="ev_wed_hindu_desc">Arraigada en siglos de tradición y celebrada en presencia de todos los que amamos, nuestra ceremonia hindú es donde dos familias se vuelven una. Entre las verdes colinas de Colombia, los rituales ancestrales se despliegan bajo el cielo abierto; cada paso una promesa silenciosa, cada bendición un hilo que une nuestros dos mundos.</p>
             </div>
             <div class="ceremony">
-              <img src="catolica.png" data-i18n-alt="alt_catholic" alt="Ilustración en acuarela de un camino en un bosque de guadua" />
+              <img src="catholicceremony.png" data-i18n-alt="alt_catholic" alt="Ilustración en acuarela de un camino en un bosque de guadua" />
               <h4 class="ceremony__title" data-i18n="ev_wed_catholic_title">Ceremonia católica</h4>
               <p class="event__desc" data-i18n="ev_wed_catholic_desc">En la quietud de un bosque de guadua, nuestra ceremonia católica es una celebración sagrada de fe, amor y las promesas que llevaremos toda la vida. Rodeados de las personas que más queremos, intercambiaremos nuestros votos y comenzaremos juntos el camino del matrimonio.</p>
             </div>
@@ -248,9 +255,10 @@
             <img src="reception.png" data-i18n-alt="alt_reception" alt="Ilustración en acuarela de la fiesta de recepción de noche" />
           </div>
           <div class="event__body">
-            <h3 class="event__title" data-i18n="ev_rec_name">Recepción</h3>
+            <h3 class="event__name" data-i18n="ev_rec_name">Recepción</h3>
             <p class="event__meta" data-i18n="ev_rec_meta1">Sábado 26 de septiembre · 5:30 p. m. a 12:00 a. m.</p>
-            <p class="event__meta"><a class="event__venue" href="https://www.haciendaeljardin.com.co/" target="_blank" rel="noopener noreferrer" data-i18n="ev_rec_venue">Hacienda El Jardín</a></p>
+            <!-- Falta URL real de la Hacienda El Jardín: reemplazar href="#" cuando la tengan -->
+            <p class="event__meta"><a class="event__venue" href="#" data-i18n="ev_rec_venue">Hacienda El Jardín</a></p>
             <p class="event__logistics" data-i18n="ev_rec_buses">Los buses salen a las 4:45 p. m. y regresan al hotel a las 12:00 a. m.</p>
             <p class="event__desc" data-i18n="ev_rec_desc">Cuando cae el sol, la celebración cobra vida. Una banda increíble, una pista llena de energía y un ambiente eléctrico preparan el escenario para una noche de baile sin parar. Ritmos latinos en vivo y música de alta energía mantendrán la fiesta hasta altas horas, cerrando nuestro fin de semana de boda por todo lo alto.</p>
             <p class="event__dress" data-i18n="ev_rec_dress">Atuendo: ¡con todo! Glamour, diversión y lista para la fiesta. Piensen en lentejuelas, brillo, colores intensos y su mejor look de noche; eso sí, algo con lo que puedan bailar.</p>
